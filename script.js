@@ -32,6 +32,7 @@ function pasarUrl(url) {
   mostrarFoto()
     .then(function(data) {
       document.getElementById("main").src = data.message;
+      ///local storage. perro actual, hacer funcion.
     })
     .catch(function(e) {
       console.error("no se encuentra el archivo json");
@@ -41,3 +42,20 @@ function pasarUrl(url) {
 function mostrarTitulo(mensaje) {
   document.getElementById("perrito").textContent = mensaje;
 }
+
+
+function setearLocalStorage(data) {
+  perro = data;
+
+  localStorage.setItem('perro', data);
+  
+  console.log("dsfsdfd", perro)
+
+}
+
+
+
+
+/// para clickear en los botones:::
+addEventListener
+
