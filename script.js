@@ -1,25 +1,6 @@
-// async function readJson() {
-//   try {
-//     var response = await fetch("https://dog.ceo/api/breeds/list/all");
-//     var data = await response.json();
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
-// readJson()
-//   .then(function(data) {
-//     console.log(data);
-//   })
-//   .catch(function(e) {
-//     console.error("no se encuentra el archivo json");
-//     console.log(e);
-//   });
-
-async function showImage() {
+async function start() {
   try {
-    var response = await fetch("https://dog.ceo/api/breeds/image/random");
+    var response = await fetch("https://dog.ceo/api/breeds/list/random");
     var data = await response.json();
     return data;
   } catch (error) {
@@ -27,37 +8,40 @@ async function showImage() {
   }
 }
 
-showImage()
+start()
   .then(function(data) {
-    mostrar(data);
+    pasarUrl(data);
   })
   .catch(function(e) {
     console.error("no se encuentra el archivo json");
     console.log(e);
   });
-async function mostrarFoto() {
-  try {
-    var response = await fetch(
-      "https://dog.ceo/api/breed/vizsla/images/random"
-    );
-    var data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
+
+function pasarUrl(url) {
+  console.log(url.message);
+  mostrarTitulo(url.message);
+  async function mostrarFoto() {
+    try {
+      var response = await fetch(
+        "https://dog.ceo/api/breed/" + url.message + "/images/random"
+      );
+      var data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
+
+  mostrarFoto()
+    .then(function(data) {
+      document.getElementById("main").src = data.message;
+    })
+    .catch(function(e) {
+      console.error("no se encuentra el archivo json");
+      console.log(e);
+    });
 }
 
-mostrarFoto()
-  .then(function(data) {
-    mostrarFoto = data;
-    console.log(mostrarFoto);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
-
-function mostrar(data) {
-  var imagen = (document.getElementById("main").src = data.message);
-  console.log(imagen, data.message);
+function mostrarTitulo(mensaje) {
+  document.getElementById("perrito").textContent = mensaje;
 }
