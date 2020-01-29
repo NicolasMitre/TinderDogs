@@ -35,27 +35,29 @@ showImage()
     console.error("no se encuentra el archivo json");
     console.log(e);
   });
-        async function vizsla() {
-          try {
-            var response = await fetch("https://dog.ceo/api/breed/vizsla/images/random");
-            var data = await response.json();
-            return data;
-          } catch (error) {
-            throw error;
-          }
-        }
-        
-        var cuentaVizsla;
-        vizsla()
-          .then(function(data) {
-            cuentaVizsla = data;
-            console.log(cuentaVizsla);
-          })
-          .catch(function(e) {
-            console.error("no se encuentra el archivo json");
-            console.log(e);
-          });
+async function mostrarFoto() {
+  try {
+    var response = await fetch(
+      "https://dog.ceo/api/breed/vizsla/images/random"
+    );
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+mostrarFoto()
+  .then(function(data) {
+    mostrarFoto = data;
+    console.log(mostrarFoto);
+  })
+  .catch(function(e) {
+    console.error("no se encuentra el archivo json");
+    console.log(e);
+  });
 
 function mostrar(data) {
   var imagen = (document.getElementById("main").src = data.message);
   console.log(imagen, data.message);
+}
