@@ -44,5 +44,5 @@ function pasarUrl(url) {
 }
 
 function mostrarTitulo(mensaje) {
-  document.getElementById("perrito").textContent = mensaje;
+  document.getElementById("titulo").textContent = mensaje;
 }
