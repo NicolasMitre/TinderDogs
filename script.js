@@ -107,6 +107,3 @@ vizsla()
     console.log(e);
   });
 
-function (params) {
-  
-}
