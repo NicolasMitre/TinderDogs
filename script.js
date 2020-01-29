@@ -20,6 +20,7 @@ start()
 function pasarUrl(url) {
   console.log(url.message);
   mostrarTitulo(url.message);
+
   async function mostrarFoto() {
     try {
       var response = await fetch(
