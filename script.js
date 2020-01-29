@@ -1,6 +1,25 @@
-async function readJson() {
+// async function readJson() {
+//   try {
+//     var response = await fetch("https://dog.ceo/api/breeds/list/all");
+//     var data = await response.json();
+//     return data;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+// readJson()
+//   .then(function(data) {
+//     console.log(data);
+//   })
+//   .catch(function(e) {
+//     console.error("no se encuentra el archivo json");
+//     console.log(e);
+//   });
+
+async function showImage() {
   try {
-    var response = await fetch("https://dog.ceo/api/breeds/list/all");
+    var response = await fetch("https://dog.ceo/api/breeds/image/random");
     var data = await response.json();
     return data;
   } catch (error) {
@@ -8,13 +27,16 @@ async function readJson() {
   }
 }
 
-var cuentas;
-readJson()
+showImage()
   .then(function(data) {
-    cuentas = data;
-    console.log(cuentas);
+    mostrar(data);
   })
   .catch(function(e) {
     console.error("no se encuentra el archivo json");
     console.log(e);
   });
+
+function mostrar(data) {
+  var imagen = (document.getElementById("main").src = data.message);
+  console.log(imagen, data.message);
+}
