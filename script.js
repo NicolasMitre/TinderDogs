@@ -1,109 +1,43 @@
-async function readJson() {
+async function start() {
   try {
-    var response = await fetch("https://dog.ceo/api/breeds/list/all");
+    var response = await fetch("https://dog.ceo/api/breeds/list/random");
     var data = await response.json();
     return data;
   } catch (error) {
     throw error;
   }
 }
-
-var cuentas;
-readJson()
+start()
   .then(function(data) {
-    cuentas = data;
-    console.log(cuentas);
+    pasarUrl(data);
   })
   .catch(function(e) {
     console.error("no se encuentra el archivo json");
     console.log(e);
   });
-
-async function borzoi() {
-  try {
-    var response = await fetch(
-      "https://dog.ceo/api/breed/borzoi/images/random"
-    );
-    var data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
+function pasarUrl(url) {
+  console.log(url.message);
+  mostrarTitulo(url.message);
+  async function mostrarFoto() {
+    try {
+      var response = await fetch(
+        "https://dog.ceo/api/breed/" + url.message + "/images/random"
+      );
+      var data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
   }
+  mostrarFoto()
+    .then(function(data) {
+      document.getElementById("main").src = data.message;
+    })
+    .catch(function(e) {
+      console.error("no se encuentra el archivo json");
+      console.log(e);
+    });
 }
-
-var cuentaBorzoi;
-borzoi()
-  .then(function(data) {
-    cuentaBorzoi = data;
-    console.log(cuentaBorzoi);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
-
-async function cairn() {
-  try {
-    var response = await fetch("https://dog.ceo/api/breed/cairn/images/random");
-    var data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
+function mostrarTitulo(mensaje) {
+  document.getElementById("perrito").textContent = mensaje;
 }
-
-var cuentaCairn;
-cairn()
-  .then(function(data) {
-    cuentaCairn = data;
-    console.log(cuentaCairn);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
-
-async function shiba() {
-  try {
-    var response = await fetch("https://dog.ceo/api/breed/shiba/images/random");
-    var data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-var cuentaShiba;
-shiba()
-  .then(function(data) {
-    cuentaShiba = data;
-    console.log(cuentaShiba);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
-
-async function vizsla() {
-  try {
-    var response = await fetch(
-      "https://dog.ceo/api/breed/vizsla/images/random"
-    );
-    var data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-var cuentaVizsla;
-vizsla()
-  .then(function(data) {
-    cuentaVizsla = data;
-    console.log(cuentaVizsla);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
-
