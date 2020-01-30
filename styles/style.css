@@ -59,6 +59,7 @@ h1:hover {
 #flotante {
   width: 20%;
   height: 80%;
+  font-size: 130%;
   border-radius: 25px;
   background-color: #dd9f21;
   opacity: 0.5;

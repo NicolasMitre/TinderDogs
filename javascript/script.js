@@ -128,7 +128,13 @@ function mostrarTop(top) {
   const ul = document.getElementById("ul");
   var il = document.createElement("il");
   var br = document.createElement("br");
-  il.textContent = "nombre: " + top.nombre + " " + " votos: " + top.voto;
+  il.textContent = "nombre: " + top.nombre + " / " + " votos: " + top.voto;
   il.appendChild(br);
   ul.appendChild(il);
+}
+function borrar() {
+  const ul = document.getElementById("ul");
+  for (i = 0; i < 100; i++) {
+    ul.removeChild(ul.lastChild);
+  }
 }
