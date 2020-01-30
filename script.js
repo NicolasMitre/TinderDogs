@@ -7,6 +7,7 @@ var noQueridos = [""];
 
 // FIN DECLARACION DE VARIABLES.
 
+
 async function start() {
   try {
     var response = await fetch("https://dog.ceo/api/breeds/list/random");
@@ -16,7 +17,6 @@ async function start() {
     throw error;
   }
 }
-
 start()
   .then(function(data) {
     pasarUrl(data);
@@ -25,11 +25,9 @@ start()
     console.error("no se encuentra el archivo json");
     console.log(e);
   });
-
 function pasarUrl(url) {
   console.log(url.message);
   mostrarTitulo(url.message);
-
   async function mostrarFoto() {
     try {
       var response = await fetch(
@@ -41,7 +39,6 @@ function pasarUrl(url) {
       throw error;
     }
   }
-
   mostrarFoto()
     .then(function(data) {
       document.getElementById("main").src = data.message;
@@ -51,10 +48,10 @@ function pasarUrl(url) {
       console.log(e);
     });
 }
-
 function mostrarTitulo(mensaje) {
-  document.getElementById("titulo").textContent = mensaje;
+  document.getElementById("perrito").textContent = mensaje;
 }
+
 
 
 
@@ -69,3 +66,5 @@ function votarNo() {
 
 console.log("queridos:", queridos);
 console.log("no queridos", noQueridos);
+
+
