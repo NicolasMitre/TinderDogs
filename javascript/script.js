@@ -1,9 +1,7 @@
 // DECLARACION DE VARIABLES.
+var perrosEnLS = [];
 
-var queridos = [];
-var noQueridos = [];
-var acumulador;
-// FIN DECLARACION DE VARIABLES.
+var perro = { nombre:"", votos:0 };
 
 async function start() {
   try {
@@ -65,34 +63,34 @@ function mostrarTitulo(mensaje) {
 }
 
 function votarSi() {
-  queridos.push(document.getElementById("titulo").textContent);
-  ver();
+  perro.nombre = document.getElementById("titulo").textContent;
+  perro.votos += 1;
+  guardarLocalStorage(perro);
 }
 
 function votarNo() {
-  noQueridos.push(document.getElementById("titulo").textContent);
-  ver();
+  perro.nombre = document.getElementById("titulo").textContent;
+  perro.votos += 0;
+  guardarLocalStorage(perro);
 }
 
-function ver() {
-  if (acumulador == 5) {
-    coleccionPerro()
-      .then(function(data) {
-        const div = document.getElementById("suggestions");
-        const image = document.createElement("img");
-        image.setAttribute("src", data.message);
-        div.appendChild(image);
-      })
-      .catch(function(e) {
-        console.error("no se encuentra el archivo json");
-        console.log(e);
-      });
-    acumulador = 0;
-    queridos = [];
-    noQueridos = [];
-    console.log(acumulador);
-  } else {
-    acumulador = queridos.length + noQueridos.length;
-    console.log(acumulador);
-  }
+
+function guardarLocalStorage(perro) {
+  
+var valor = JSON.parse(localStorage.getItem('perros'));
+
+if (valor){  
+      for(i = 0; i < valor.length; i++){
+        console.log(valor[i]);   
+        perrosEnLS.push(valor[i])     
+      }
+      
+      perrosEnLS.push(perro);
+      localStorage.setItem('perros', JSON.stringify(perrosEnLS));  
+} 
+else
+{ 
+  perrosEnLS.push(perro);
+  localStorage.setItem('perros', JSON.stringify(perrosEnLS));
+}
 }
