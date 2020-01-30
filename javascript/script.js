@@ -1,11 +1,7 @@
 // DECLARACION DE VARIABLES.
-
 var perrosEnLS = [];
 
 var perro = { nombre:"", votos:0 };
-
-
-// FIN DECLARACION DE VARIABLES.
 
 async function start() {
   try {
@@ -26,23 +22,33 @@ start()
     console.log(e);
   });
 
+async function coleccionPerro() {
+  try {
+    var response = await fetch("https://dog.ceo/api/breeds/image/random");
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function mostrarFoto(url) {
+  try {
+    var response = await fetch(
+      "https://dog.ceo/api/breed/" + url.message + "/images/random"
+    );
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 function pasarUrl(url) {
   console.log(url.message);
   mostrarTitulo(url.message);
 
-  async function mostrarFoto() {
-    try {
-      var response = await fetch(
-        "https://dog.ceo/api/breed/" + url.message + "/images/random"
-      );
-      var data = await response.json();
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  mostrarFoto()
+  mostrarFoto(url)
     .then(function(data) {
       document.getElementById("main").src = data.message;
     })
@@ -56,37 +62,18 @@ function mostrarTitulo(mensaje) {
   document.getElementById("titulo").textContent = mensaje;
 }
 
-
-
 function votarSi() {
   perro.nombre = document.getElementById("titulo").textContent;
   perro.votos += 1;
   guardarLocalStorage(perro);
 }
 
-
 function votarNo() {
   perro.nombre = document.getElementById("titulo").textContent;
   perro.votos += 0;
   guardarLocalStorage(perro);
 }
-/*
-function guardarLocalStorage(perro) {
-  var ver = localStorage.getItem('perros');
-  if(ver)
- {
-  ver = JSON.parse(ver)
-  console.log(ver);
-  
-  perrosEnLS.push(ver);
-  localStorage.setItem('perros', JSON.stringify(perrosEnLS));
- }
- else {
-  perrosEnLS.push(perro);
-  localStorage.setItem('perros', JSON.stringify(perrosEnLS));
- }
-}
-*/
+
 
 function guardarLocalStorage(perro) {
   
