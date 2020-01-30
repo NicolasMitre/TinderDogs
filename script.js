@@ -32,7 +32,6 @@ function pasarUrl(url) {
   mostrarFoto()
     .then(function(data) {
       document.getElementById("main").src = data.message;
-      ///local storage. perro actual, hacer funcion.
     })
     .catch(function(e) {
       console.error("no se encuentra el archivo json");
@@ -44,18 +43,22 @@ function mostrarTitulo(mensaje) {
 }
 
 
-function setearLocalStorage(data) {
-  perro = data;
 
-  localStorage.setItem('perro', data);
-  
-  console.log("dsfsdfd", perro)
 
+function votarSi() {
+  queridos.push(document.getElementById("perrito"));
 }
 
 
+function votarNo() {
+  noQueridos.push('perrito');
+}
 
 
-/// para clickear en los botones:::
-addEventListener
+var queridos = [""];
+var noQueridos = [""];
+
+console.log("queridos:", queridos);
+console.log("no queridos", noQueridos);
+
 
