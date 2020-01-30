@@ -1,7 +1,4 @@
-// DECLARACION DE VARIABLES.
-var perrosEnLS = [];
-
-var perro = { nombre:"", votos:0 };
+var perro = [];
 
 async function start() {
   try {
@@ -12,15 +9,6 @@ async function start() {
     throw error;
   }
 }
-
-start()
-  .then(function(data) {
-    pasarUrl(data);
-  })
-  .catch(function(e) {
-    console.error("no se encuentra el archivo json");
-    console.log(e);
-  });
 
 async function coleccionPerro() {
   try {
@@ -43,11 +31,42 @@ async function mostrarFoto(url) {
     throw error;
   }
 }
+async function conseguirLista() {
+  try {
+    var response = await fetch("https://dog.ceo/api/breeds/list");
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+conseguirLista()
+  .then(function(data) {
+    perro = data.message;
+    objeto = [];
+    for (i = 0; i < perro.length; i++) {
+      var array = { nombre: perro[i], voto: 0 };
+      objeto.push(array);
+    }
+    perro = objeto;
+  })
+  .catch(function(e) {
+    console.error("no se encuentra el archivo json");
+    console.log(e);
+  });
+
+start()
+  .then(function(data) {
+    pasarUrl(data);
+  })
+  .catch(function(e) {
+    console.error("no se encuentra el archivo json");
+    console.log(e);
+  });
 
 function pasarUrl(url) {
-  console.log(url.message);
   mostrarTitulo(url.message);
-
   mostrarFoto(url)
     .then(function(data) {
       document.getElementById("main").src = data.message;
@@ -63,34 +82,59 @@ function mostrarTitulo(mensaje) {
 }
 
 function votarSi() {
-  perro.nombre = document.getElementById("titulo").textContent;
-  perro.votos += 1;
-  guardarLocalStorage(perro);
+  nombre = document.getElementById("titulo").textContent;
+  confirmarPerro(nombre, 1);
 }
 
 function votarNo() {
-  perro.nombre = document.getElementById("titulo").textContent;
-  perro.votos += 0;
-  guardarLocalStorage(perro);
+  nombre = document.getElementById("titulo").textContent;
+  confirmarPerro(nombre, 0);
 }
 
-
-function guardarLocalStorage(perro) {
-  
-var valor = JSON.parse(localStorage.getItem('perros'));
-
-if (valor){  
-      for(i = 0; i < valor.length; i++){
-        console.log(valor[i]);   
-        perrosEnLS.push(valor[i])     
-      }
-      
-      perrosEnLS.push(perro);
-      localStorage.setItem('perros', JSON.stringify(perrosEnLS));  
-} 
-else
-{ 
-  perrosEnLS.push(perro);
-  localStorage.setItem('perros', JSON.stringify(perrosEnLS));
+function confirmarPerro(nombre, vote) {
+  ordenacion();
+  for (i = 0; i < perro.length; i++) {
+    if (perro[i].nombre == nombre) {
+      perro[i].voto += vote;
+      console.log(perro);
+    }
+  }
+  start()
+    .then(function(data) {
+      pasarUrl(data);
+    })
+    .catch(function(e) {
+      console.error("no se encuentra el archivo json");
+      console.log(e);
+    });
 }
+
+function ordenacion() {
+  perro.sort(function(a, b) {
+    if (a.voto > b.voto) {
+      return 1;
+    }
+    if (a.voto < b.voto) {
+      return -1;
+    }
+    return 0;
+  });
+  for (i = 0; i < 5; i++) {
+    mostrarTop(perro[perro.length - (i + 1)]);
+  }
+}
+
+function mostrarTop(top) {
+  const ul = document.getElementById("ul");
+  var il = document.createElement("il");
+  var br = document.createElement("br");
+  il.textContent = "nombre: " + top.nombre + " / " + " votos: " + top.voto;
+  il.appendChild(br);
+  ul.appendChild(il);
+}
+function borrar() {
+  const ul = document.getElementById("ul");
+  for (i = 0; i < 100; i++) {
+    ul.removeChild(ul.lastChild);
+  }
 }
