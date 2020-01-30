@@ -1,3 +1,13 @@
+// DECLARACION DE VARIABLES.
+
+
+var queridos = [""];
+var noQueridos = [""];
+
+
+// FIN DECLARACION DE VARIABLES.
+
+
 async function start() {
   try {
     var response = await fetch("https://dog.ceo/api/breeds/list/random");
@@ -46,17 +56,13 @@ function mostrarTitulo(mensaje) {
 
 
 function votarSi() {
-  queridos.push(document.getElementById("perrito"));
+  queridos.push(document.getElementById("perrito").textContent);
 }
 
 
 function votarNo() {
-  noQueridos.push('perrito');
+  noQueridos.push(document.getElementById("perrito").textContent);
 }
-
-
-var queridos = [""];
-var noQueridos = [""];
 
 console.log("queridos:", queridos);
 console.log("no queridos", noQueridos);
