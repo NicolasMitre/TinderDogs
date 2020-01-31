@@ -91,7 +91,10 @@ function guardarLocalStorage(perro) {
 
 function guardarLocalStorage(perro) {
   
-var valor = JSON.parse(localStorage.getItem('perros'));
+var valor = JSON.stringify(localStorage.getItem('perros'));
+
+console.log("sadfasdf", valor);
+
 
 if (valor){  
       for(i = 0; i < valor.length; i++){
