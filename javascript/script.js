@@ -79,10 +79,10 @@ start()
   });
 
 function pasarUrl(url) {
-  mostrarTitulo(url.message);
   mostrarFoto(url)
     .then(function(data) {
       document.getElementById("main").src = data.message;
+      mostrarTitulo(url.message);
     })
     .catch(function(e) {
       console.error("no se encuentra el archivo json");
