@@ -20,6 +20,18 @@ async function coleccionPerro() {
   }
 }
 
+async function mostrarGanador(url) {
+  try {
+    var response = await fetch(
+      "https://dog.ceo/api/breed/" + url.nombre + "/images/random"
+    );
+    var data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function mostrarFoto(url) {
   try {
     var response = await fetch(
@@ -31,6 +43,7 @@ async function mostrarFoto(url) {
     throw error;
   }
 }
+
 async function conseguirLista() {
   try {
     var response = await fetch("https://dog.ceo/api/breeds/list");
@@ -96,7 +109,6 @@ function confirmarPerro(nombre, vote) {
   for (i = 0; i < perro.length; i++) {
     if (perro[i].nombre == nombre) {
       perro[i].voto += vote;
-      console.log(perro);
     }
   }
   start()
@@ -122,6 +134,7 @@ function ordenacion() {
   for (i = 0; i < 5; i++) {
     mostrarTop(perro[perro.length - (i + 1)]);
   }
+  localStorage.setItem("ganador", JSON.stringify(perro[perro.length - 1]));
 }
 
 function mostrarTop(top) {
@@ -134,7 +147,23 @@ function mostrarTop(top) {
 }
 function borrar() {
   const ul = document.getElementById("ul");
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 50; i++) {
     ul.removeChild(ul.lastChild);
   }
+}
+
+function ganador() {
+  var ganador = JSON.parse(localStorage.getItem("ganador"));
+  mostrarTitulo(ganador.nombre);
+  mostrarGanador(ganador)
+    .then(function(data) {
+      console.log(data);
+
+      document.getElementById("main").src = data.message;
+    })
+    .catch(function(e) {
+      console.error("no se encuentra el archivo json");
+      console.log(e);
+    });
+  console.log(ganador);
 }
