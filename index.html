@@ -10,20 +10,21 @@
   </head>
   <body>
     <div class="container">
+      <div id="flotante">
+        <button onclick="borrar()">
+          LIMPIAR PANTALLA</button
+        ><button onclick="ganador()">
+          GANADOR
+        </button>
+        <ul id="ul"></ul>
+      </div>
       <h1 id="titulo"></h1>
       <div class="imageProfile">
         <img id="main" src="" alt="" />
       </div>
       <div class="selection">
-        <button id="yes" onclick="votarSi()" >VOTO POSITIVO</button>
-        <button id="no" onclick="votarNo()" >VOTO NEGATIVO</button>
-      </div>
-      <div class="suggestions">
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="" alt="" />
+        <button id="yes" onclick="votarSi()">VOTO POSITIVO</button>
+        <button id="no" onclick="votarNo()">VOTO NEGATIVO</button>
       </div>
     </div>
   </body>

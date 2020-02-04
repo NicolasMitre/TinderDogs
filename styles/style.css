@@ -28,7 +28,7 @@ h1#titulo {
   display: flex;
   justify-content: center;
   margin-bottom: 1%;
-  border: 5px solid black;
+  border: 5px solid #dd9f21;
 }
 img#main {
   min-width: 40vw;
@@ -54,4 +54,16 @@ img#main {
 
 h1:hover {
   cursor: default;
+}
+
+#flotante {
+  width: 20%;
+  height: 80%;
+  font-size: 130%;
+  border-radius: 25px;
+  background-color: #dd9f21;
+  opacity: 0.5;
+  left: 0;
+  margin-left: 2.5%;
+  position: absolute;
 }
