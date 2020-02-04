@@ -1,7 +1,7 @@
 class vista {
     constructor(controlador){
     this.controlador = controlador;
-    this.init();        
+    this.init();
     }
 
  pasarUrl(url) {
@@ -63,6 +63,5 @@ class vista {
   console.log(ganador);
 }
 }
-
 
 export default vista
