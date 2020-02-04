@@ -113,7 +113,7 @@ function votarNo() {
   nombre = document.getElementById("titulo").textContent;
   confirmarPerro(nombre, 0);
 }
-/*
+
 function guardarLocalStorage(perro) {
   var ver = localStorage.getItem('perros');
   if(ver)
@@ -168,7 +168,7 @@ function borrar() {
     ul.removeChild(ul.lastChild);
 }
 }
-*/
+
 
 
 function guardarLocalStorage(perro) {
@@ -193,34 +193,3 @@ else
   localStorage.setItem('perros', JSON.stringify(perrosEnLS));
 }
 }
-
-
-function buscarPerroMasVotado(perrosEnLS) {
-  
-      var cantidad = JSON.parse(localStorage.getItem('perros'));
-
-      var perroMasVotado;
-
-      if (cantidad)
-      {
-        for (i=0; i<cantidad; i++)
-        {
-          if( localStorage[i].votos > localStorage[cantidad].votos)
-          {
-                perroMasVotado = localStorage[i];
-          } 
-        }
-      }
-      else
-      {
-        perroMasVotado = localStorage[cantidad];
-      }
-}
-
-
-
-var probanding = localStorage.getItem('perros');
-console.log(probanding);
-
-console.log("ACA", probanding);
-
